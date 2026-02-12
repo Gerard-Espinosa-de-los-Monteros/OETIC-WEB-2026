@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEETOGETHER — Powered with honey</title>
+  <meta name="description" content="BEETOGETHER connecta persones amb aficions similars a prop teu i ajuda empreses/institucions a promocionar activitats al públic adequat. Powered with honey." />
+  <meta name="theme-color" content="#957083" />
+
+  <style>
+    :root{
+      /* PALETA */
+      --rose:  #957083;   /* fons alegre */
+      --ink:   #281822;   /* text fosc / base contrast */
+      --plum:  #48192e;   /* accents */
+      --honey: #c59c79;   /* CTA + highlights */
+
+      /* UI */
+      --text: rgba(22, 10, 16, 0.92);   /* ara el fons és més clar -> text fosc */
+      --muted: rgba(22, 10, 16, 0.70);
+      --card: rgba(255,255,255,0.44);
+      --card2: rgba(255,255,255,0.34);
+      --stroke: rgba(40,24,34,0.18);
+
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --shadow: 0 18px 60px rgba(40,24,34,0.22);
+      --max: 1120px;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height: 100%; }
+    html,body{   cursor: url("assets/cursor.png") 16 16, auto; /* <-- AFEGEIX AQUESTA LÍNIA */ }
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color: var(--text);
+  overflow-x: hidden;
+
+
+  /* FONS ALEGRE basat en #957083 */
+  background:
+    radial-gradient(900px 520px at 10% 10%, rgba(197,156,121,0.55), transparent 60%),
+    radial-gradient(900px 520px at 85% 15%, rgba(72,25,46,0.32), transparent 62%),
+    radial-gradient(900px 520px at 60% 95%, rgba(40,24,34,0.25), transparent 62%),
+    linear-gradient(180deg,
+      rgba(149,112,131,1) 0%,
+      rgba(149,112,131,0.92) 35%,
+      rgba(149,112,131,0.82) 100%);
+}
+
+    a{ color: inherit; text-decoration: none; }
+    img{ max-width: 100%; display: block; }
+
+    .wrap{ width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    /* NAV */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(149,112,131,0.70), rgba(149,112,131,0.35));
+      border-bottom: 1px solid rgba(40,24,34,0.18);
+    }
+    .nav-inner{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: 0.2px;
+    }
+
+    /* LOGO PNG */
+    .brand-logo{
+      width: 62px;
+      height: 62px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.42);
+      border: 1px solid rgba(40,24,34,0.16);
+      box-shadow: 0 10px 30px rgba(40,24,34,0.18);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .brand-logo img{
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .brand small{
+      display:block;
+      font-weight: 700;
+      color: rgba(22,10,16,0.65);
+      letter-spacing: 0.2px;
+      margin-top: 2px;
+    }
+
+    .nav-links{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: rgba(22,10,16,0.72);
+      font-weight: 720;
+      font-size: 14px;
+    }
+    .nav-links a{
+      padding: 10px 10px;
+      border-radius: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover{
+      background: rgba(255,255,255,0.30);
+      color: rgba(22,10,16,0.92);
+    }
+    .nav-cta{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Buttons */
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid rgba(40,24,34,0.18);
+      background: rgba(255,255,255,0.35);
+      color: rgba(22,10,16,0.92);
+      padding: 11px 14px;
+      border-radius: 14px;
+      font-weight: 780;
+      font-size: 14px;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.46);
+      border-color: rgba(40,24,34,0.24);
+    }
+    .btn-primary{
+      border-color: rgba(72,25,46,0.22);
+      background: linear-gradient(135deg, rgba(197,156,121,0.95), rgba(197,156,121,0.70));
+      color: rgba(40,24,34,0.95);
+      box-shadow: 0 14px 40px rgba(197,156,121,0.28);
+    }
+    .btn-primary:hover{
+      background: linear-gradient(135deg, rgba(197,156,121,1), rgba(197,156,121,0.78));
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(72,25,46,0.18);
+      background: rgba(255,255,255,0.34);
+      color: rgba(22,10,16,0.76);
+      font-weight: 760;
+      font-size: 13px;
+    }
+    .dot{
+      width:8px; height:8px;
+      border-radius:99px;
+      background: var(--honey);
+      box-shadow: 0 0 0 4px rgba(197,156,121,0.30);
+    }
+
+    /* HERO */
+    .hero{ padding: 46px 0 28px; }
+    .hero-grid{
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero h1{
+      margin: 14px 0 10px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.03;
+      letter-spacing: -0.8px;
+      color: rgba(22,10,16,0.95);
+    }
+    .hero p{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 56ch;
+    }
+    .hero-actions{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .hero-card{
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(40,24,34,0.18);
+      background: linear-gradient(180deg, rgba(255,255,255,0.42), rgba(255,255,255,0.30));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      min-height: 340px;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(520px 320px at 20% 20%, rgba(197,156,121,0.45), transparent 60%),
+        radial-gradient(520px 320px at 80% 30%, rgba(72,25,46,0.20), transparent 62%),
+        radial-gradient(520px 360px at 55% 90%, rgba(40,24,34,0.18), transparent 62%);
+      pointer-events:none;
+    }
+    .hero-card-inner{
+      position: relative;
+      padding: 18px;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+    }
+
+    .tagline{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(72,25,46,0.18);
+      background: rgba(255,255,255,0.40);
+      color: rgba(22,10,16,0.82);
+      font-weight: 820;
+      font-size: 13px;
+    }
+    .tagline b{ color: rgba(72,25,46,0.92); }
+
+    .mock{
+      border-radius: 18px;
+      border: 1px solid rgba(40,24,34,0.18);
+      background: rgba(255,255,255,0.34);
+      overflow: hidden;
+      padding: 14px;
+    }
+    .mock-top{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: rgba(22,10,16,0.70);
+      font-weight: 760;
+      font-size: 13px;
+    }
+    .mock-badges{ display:flex; gap: 8px; flex-wrap: wrap; }
+    .badge{
+      font-size: 12px;
+      font-weight: 820;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(72,25,46,0.18);
+      background: rgba(255,255,255,0.42);
+      color: rgba(22,10,16,0.80);
+    }
+    .badge.honey{
+      border-color: rgba(197,156,121,0.70);
+      background: rgba(197,156,121,0.32);
+    }
+    .badge.rose{
+      border-color: rgba(149,112,131,0.55);
+      background: rgba(149,112,131,0.26);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .mini{
+      border-radius: 16px;
+      border: 1px solid rgba(40,24,34,0.16);
+      background: rgba(255,255,255,0.42);
+      padding: 12px;
+    }
+    .mini h4{
+      margin: 0 0 6px;
+      font-size: 14px;
+      letter-spacing: -0.2px;
+      color: rgba(22,10,16,0.92);
+    }
+    .mini p{
+      margin: 0;
+      color: rgba(22,10,16,0.68);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .hero-stats{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .stat{
+      flex: 1 1 120px;
+      border-radius: 16px;
+      border: 1px solid rgba(40,24,34,0.16);
+      background: rgba(255,255,255,0.40);
+      padding: 12px;
+      min-width: 140px;
+    }
+    .stat strong{ font-size: 18px; display:block; letter-spacing: -0.3px; }
+    .stat span{ color: rgba(22,10,16,0.66); font-size: 12px; font-weight: 760; }
+
+    /* Sections */
+    section{ padding: 34px 0; }
+    .section-title{
+      display:flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .section-title h2{
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.4px;
+      color: rgba(22,10,16,0.95);
+    }
+    .section-title p{
+      margin: 0;
+      color: var(--muted);
+      max-width: 58ch;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .kicker{
+      color: rgba(72,25,46,0.92);
+      font-weight: 920;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid-2{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .split{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+
+    .card{
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(40,24,34,0.16);
+      background: rgba(255,255,255,0.40);
+      padding: 16px;
+      box-shadow: 0 14px 40px rgba(40,24,34,0.14);
+    }
+    .card h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+      color: rgba(22,10,16,0.92);
+    }
+    .card p{
+      margin: 0;
+      color: rgba(22,10,16,0.70);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .icon{
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      border: 1px solid rgba(40,24,34,0.16);
+      background: linear-gradient(135deg, rgba(197,156,121,0.34), rgba(149,112,131,0.26));
+      display:grid;
+      place-items:center;
+      margin-bottom: 10px;
+    }
+    .icon svg{ width: 20px; height: 20px; opacity: 0.92; }
+
+    /* Forms */
+    form{ display:grid; gap: 10px; margin-top: 10px; }
+    label{ font-size: 13px; font-weight: 850; color: rgba(22,10,16,0.78); }
+    input, textarea, select{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(40,24,34,0.18);
+      background: rgba(255,255,255,0.48);
+      color: rgba(22,10,16,0.92);
+      outline: none;
+    }
+    input::placeholder, textarea::placeholder{ color: rgba(22,10,16,0.46); }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(197,156,121,0.85);
+      box-shadow: 0 0 0 4px rgba(197,156,121,0.22);
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    .form-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    details{
+      border: 1px solid rgba(40,24,34,0.16);
+      background: rgba(255,255,255,0.40);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    details summary{
+      cursor: pointer;
+      list-style: none;
+      font-weight: 880;
+      color: rgba(22,10,16,0.88);
+    }
+    details summary::-webkit-details-marker{ display:none; }
+    details p{ margin: 10px 0 0; color: rgba(22,10,16,0.72); line-height: 1.55; font-size: 14px; }
+    .faq{ display:grid; gap: 10px; }
+
+    .divider{ height: 1px; background: rgba(40,24,34,0.14); margin: 10px 0; }
+    .muted{ color: var(--muted); }
+
+    footer{
+      padding: 26px 0 46px;
+      border-top: 1px solid rgba(40,24,34,0.16);
+      color: rgba(22,10,16,0.70);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.00));
+    }
+    .footer-inner{
+      display:flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .footer-links{
+      display:flex; gap: 14px; flex-wrap: wrap;
+      color: rgba(22,10,16,0.70);
+      font-weight: 780;
+      font-size: 14px;
+    }
+    .footer-links a:hover{ color: rgba(22,10,16,0.92); }
+
+    @media (max-width: 940px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .split{ grid-template-columns: 1fr; }
+      .form-row{ grid-template-columns: 1fr; }
+      .nav-links{ display: none; }
+      .hero-card{ min-height: 320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="BEETOGETHER">
+        <span class="brand-logo" aria-hidden="true">
+          <img src="assets/logo.png" alt="" />
+        </span>
+        <span>
+          BEETOGETHER
+          <small>Powered with honey</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegació">
+        <a href="#com-funciona">Com funciona</a>
+        <a href="#empreses">Per a empreses</a>
+        <a href="#usuaris">Per a usuaris</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacte">Contacte</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn" href="#empreses">Sóc empresa</a>
+        <a class="btn btn-primary" href="#descarrega">Descarrega l'app</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="chip"><span class="dot"></span> Connecta amb gent i activitats a prop teu</span>
+        <h1>Troba la teva tribu. <br/>Activa el teu barri.</h1>
+        <p>
+          <strong>BEETOGETHER</strong> posa en contacte persones amb <b>aficions semblants</b> i <b>properes</b>.
+          I alhora permet a empreses i institucions <b>promocionar activitats</b> amb segmentació intel·ligent,
+          arribant a qui realment li interessa.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#descarrega">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3v10m0 0l4-4m-4 4l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Descarrega l'app
+          </a>
+          <a class="btn" href="#empreses">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 21h18M6 21V7a2 2 0 012-2h8a2 2 0 012 2v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M9 9h6M9 12h6M9 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Vull afegir una activitat
+          </a>
+          <a class="btn" href="#contacte">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 10.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 11-3.8-11.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Parla amb nosaltres
+          </a>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="hero-stats" aria-label="Indicadors">
+          <div class="stat">
+            <strong>+ activitats</strong>
+            <span>locals, empreses i institucions</span>
+          </div>
+          <div class="stat">
+            <strong>+ connexions</strong>
+            <span>per aficions i proximitat</span>
+          </div>
+          <div class="stat">
+            <strong>+ impacte</strong>
+            <span>promoció al públic adequat</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Vista conceptual de l'app">
+        <div class="hero-card-inner">
+          <div class="mock-top">
+            <span class="tagline"><b>Powered</b> with honey</span>
+            <span class="muted">Barcelona · 2 km</span>
+          </div>
+
+          <div class="mock" role="img" aria-label="Mock de feed d'activitats">
+            <div class="mock-top">
+              <span><b>Activitats</b> per a tu</span>
+              <div class="mock-badges">
+                <span class="badge honey">Senderisme</span>
+                <span class="badge rose">Fotografia</span>
+                <span class="badge">Jocs</span>
+              </div>
+            </div>
+
+            <div class="cards">
+              <div class="mini">
+                <h4>Ruta curta + cafè</h4>
+                <p>Dissabte · 10:00 · Collserola</p>
+              </div>
+              <div class="mini">
+                <h4>Taller de ceràmica</h4>
+                <p>Divendres · 18:30 · Gràcia</p>
+              </div>
+              <div class="mini">
+                <h4>Afterwork d’escacs</h4>
+                <p>Dimecres · 19:00 · Poblenou</p>
+              </div>
+              <div class="mini">
+                <h4>Concert íntim</h4>
+                <p>Dijous · 20:30 · Raval</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="split">
+            <div class="card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s-7-4.35-7-10a4 4 0 017-2 4 4 0 017 2c0 5.65-7 10-7 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>Proximitat real</h3>
+              <p>Descobreix gent i plans al teu entorn, sense fricció.</p>
+            </div>
+            <div class="card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h16M7 7v14m10-14v14M6 21h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M9 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>Promoció útil</h3>
+              <p>Empreses i institucions arriben a persones amb interès real.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- COM FUNCIONA -->
+  <section id="com-funciona">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <div class="kicker">Com funciona</div>
+          <h2>Una app social centrada en activitats</h2>
+        </div>
+        <p>
+          BEETOGETHER connecta per <b>aficions</b> + <b>proximitat</b> i dona visibilitat a activitats
+          d’empreses, locals i institucions (incloent iniciatives públiques).
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7l3-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>1) Tria aficions</h3>
+          <p>Indica què t’agrada i l’app et proposa activitats i persones compatibles.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 21s-7-4.35-7-10a4 4 0 017-2 4 4 0 017 2c0 5.65-7 10-7 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 11a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>2) Filtra per distància</h3>
+          <p>Prioritza el “prop de tu” perquè les trobades siguin viables i naturals.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4v8z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>3) Contacta i queda</h3>
+          <p>Missatgeria i invitacions simples: el focus és passar del “scroll” al “fer”.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- (La resta de seccions: empreses/usuaris/descàrrega/faq/contacte/footer)
+       Pots reutilitzar-les tal qual de la versió anterior. Si vols, te les torno a enganxar completes. -->
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>
+        <div class="brand" style="gap:12px;">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="assets/logo.png" alt="" />
+          </span>
+          <span>
+            BEETOGETHER
+            <small>Powered with honey</small>
+          </span>
+        </div>
+        <p class="muted" style="max-width: 62ch; margin-top: 10px;">
+          Connectem persones i activitats locals. Facilitem promoció amb segmentació per interessos i proximitat.
+        </p>
+      </div>
+
+      <div class="footer-links" aria-label="Enllaços de peu">
+        <a href="#com-funciona">Com funciona</a>
+        <a href="#empreses">Empreses</a>
+        <a href="#descarrega">Descarrega</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacte">Contacte</a>
+      </div>
+    </div>
+
+    <div class="wrap" style="margin-top: 16px;">
+      <div class="divider"></div>
+      <div style="display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap;">
+        <span class="muted">© <span id="year"></span> BEETOGETHER. Tots els drets reservats.</span>
+        <span class="muted">Política de privacitat · Termes · Cookies</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
